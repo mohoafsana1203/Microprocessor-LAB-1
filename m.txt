@@ -1,0 +1,64 @@
+;logical task(and,or,xor)
+;101b
+;111
+;and: 101b='5' , And result='5'
+;or: 111b='7' Or result='7' bit wise operation 1 or 1=1
+;xor:010b='2' XOR result='2'
+.model small
+.stack 100h
+.data 
+andmsg db        "AND result:$"
+ormsg  db 13,10, "OR result:$"
+xormsg db 13,10, "XOR result:$"
+.code
+main proc 
+    mov ax,@data
+    mov ds,ax
+    
+    ;and str print
+    lea dx,andmsg
+    mov ah,9h ;str print=9h
+    int 21h
+    ;and operation
+    ;bx=base cng kora hocche aikhane but 8 bit nibo tai
+    mov bl,101b  ;suffix hisabe b ashce ,bl=101
+    and bl,111b  ;bl=101b and bl=111 ='5'
+    mov dl,bl    ;dl=5, aita decimal er 5
+    add dl,30h   ;ascii convert '5'
+    mov ah,2h    ;char print
+    int 21h      ;input 0-9,output 0-9
+    
+    ;or str print
+    lea dx,ormsg
+    mov ah,9h ;str print=9h
+    int 21h
+    ;or operation
+    mov bl,101b  
+    or  bl,111b  
+    mov dl,bl    
+    add dl,48   
+    mov ah,2h    
+    int 21h 
+    
+    ;xor str print
+    lea dx,xormsg
+    mov ah,9h ;str print=9h
+    int 21h 
+    ;xor operation
+    mov bl,101b  
+    xor  bl,111b  
+    mov dl,bl    
+    add dl,'0'   
+    mov ah,2h    
+    int 21h 
+
+
+    exit:
+    mov ah,4ch
+    int 21h
+    
+    main endp
+end main
+
+
+
